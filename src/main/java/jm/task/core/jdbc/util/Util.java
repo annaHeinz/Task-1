@@ -2,11 +2,14 @@ package jm.task.core.jdbc.util;
 
 //import com.mysql.cj.jdbc.ConnectionImpl;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.SessionFactory;
+
+import javax.security.auth.login.AppConfigurationEntry;
+import org.hibernate.cfg.Configuration;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class Util {
     // реализуйте настройку соеденения с БД
@@ -21,5 +24,10 @@ public class Util {
         }
         catch (SQLException e){e.printStackTrace();}
         return conn;
+    }
+
+    public static SessionFactory getSessionFactory(){
+        return new  Configuration().addAnnotatedClass(User.class).buildSessionFactory();
+
     }
 }
